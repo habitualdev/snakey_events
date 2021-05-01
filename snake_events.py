@@ -1,6 +1,5 @@
 import requests
 from pywin32 import win32evtlog
-import json
 
 server = 'localhost'  # name of the target computer to get event logs
 logtype = ['System', 'Application', 'Security']
@@ -17,7 +16,7 @@ while True:
                 json_data = {"Event Category": event.EventCategory, "TimeStamp": (event.TimeGenerated,),
                              "Event Source Name": (event.SourceName,), "Event ID": (event.EventID,),
                              "Event Type": event.EventType}
-                headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+                headers = {'User-Agent': 'Vector-Agent 1.0/ Python ', 'Content-type': 'application/json', 'Accept': 'text/plain'}
                 data = event.StringInserts
                 if data:
                     for msg in data:
